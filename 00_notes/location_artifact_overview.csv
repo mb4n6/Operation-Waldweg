@@ -1,0 +1,4 @@
+artifact,strength,limitation
+iOS location_points.csv,gute Granularität nahe Ereignis,"gemischte Genauigkeit, Drift, späte Cell-Punkte"
+Android device_locations.csv,räumliche Spur des Verdächtigen,"Network-Punkte teils ungenau, False Leads"
+Google location-history.json,semantisch gut lesbar,"weniger granular, PlaceVisit nur LOW_CONFIDENCE"

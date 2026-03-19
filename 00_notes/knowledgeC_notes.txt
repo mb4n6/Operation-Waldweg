@@ -1,0 +1,11 @@
+knowledgeC.db – verbessert
+
+Enthält:
+- App-Nutzung (SMS, Mail, Safari, Kalender)
+- Bewegungsdaten (walking / stationary)
+- Bluetooth-Proximity
+- überlappende Events
+
+Ziel:
+- Teilnehmer müssen Events korrelieren
+- keine direkte Interpretation möglich

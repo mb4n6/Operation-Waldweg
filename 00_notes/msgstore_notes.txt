@@ -1,0 +1,14 @@
+msgstore.db – erweitert
+
+Enthält:
+- Einzelchat Opfer ↔ Kontakte
+- Gruppenchat (Gym)
+- Werkstatt-Team Kommunikation
+- Mediennachrichten
+- Standortfreigabe
+- gelöschte Nachricht (kritisch)
+
+Ziel:
+- Teilnehmer müssen relevante Nachrichten im Noise finden
+- gelöschte Inhalte erkennen
+- Standort + Kommunikation korrelieren

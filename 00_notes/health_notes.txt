@@ -1,0 +1,12 @@
+healthdb_secure.sqlite – verbessert
+
+Enthält:
+- Wochenprofil mit Schlaf, Bewegung und Herzfrequenz
+- typische Tagesmuster (Morgenroutine, Aktivität, Ruhe)
+- mehrere falsche Peaks (Sport / Stress)
+- kritisches Ereignis mit Peak + Abbruch
+- Messlücken simuliert
+
+Ziel:
+- Peak ist nicht eindeutig → Kontext notwendig
+- Korrelation mit KnowledgeC + Location erforderlich

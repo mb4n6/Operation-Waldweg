@@ -1,0 +1,12 @@
+Photos Artefakte
+
+Enthält:
+- normale Kamerabilder (Alltag)
+- Screenshots
+- kritisches Bild nahe Tatzeit
+- inkonsistente Metadaten (Location passt nicht)
+
+Ziel:
+- Metadaten vs. Realität prüfen
+- Zeitstempel validieren
+- Bilder mit Location/Timeline korrelieren

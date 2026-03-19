@@ -1,0 +1,8 @@
+table,purpose
+handle,Kommunikationspartner
+chat,Konversationskontext / Gruppenchat
+chat_handle_join,Zuordnung Chat ↔ Handle
+message,Nachrichten mit Metadaten
+chat_message_join,Zuordnung Chat ↔ Nachricht
+attachment,Datei-/Medienobjekte
+message_attachment_join,Zuordnung Nachricht ↔ Attachment
