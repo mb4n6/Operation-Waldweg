@@ -1,25 +1,23 @@
 geraet,sandbox_pfad,bundle/paket,relevanz,beschreibung
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.amazon.mShop.android.shopping,com.amazon.mShop.android.shopping,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.dropbox.android,com.dropbox.android,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.google.android.apps.maps,com.google.android.apps.maps,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.google.android.gm,com.google.android.gm,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.instagram.android,com.instagram.android,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.linkedin.android,com.linkedin.android,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.netflix.mediaclient,com.netflix.mediaclient,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.pinterest,com.pinterest,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.spotify.lite,com.spotify.lite,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.spotify.music,com.spotify.music,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.whatsapp,com.whatsapp,noise,"App-Sandbox (Skelett, spec-getrieben)"
-Samsung,CaseForge/cases/NoiseTest/02_android_full_fs/data/data/com.zhiliaoapp.musically,com.zhiliaoapp.musically,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/173E9EC1-6A26-8DF7-3073-2E93706360A6,com.apple.mobilenotes,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/3A68D05C-BBCE-8897-5F0E-B7011D37DD45,com.spotify.client,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/3AE59C03-984C-D006-9B99-B88CF24746FE,com.amazon.Amazon,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/3D56FB88-D1CB-E860-F9CA-85C0FF1BDF2D,com.google.Gmail,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/556A37D4-27AB-48E3-D391-BB0B905C8394,com.netflix.Netflix,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/568DBBA3-89DC-2A46-5E50-120D0BD8A8DF,com.google.Maps,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/67EC2712-C08F-7309-81DB-E4D30B0BAB2E,com.toyopagroup.picaboo,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/8A3B381A-E475-76E3-DA62-F194F5812649,com.linkedin.LinkedIn,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/97F86A52-67DF-2527-8528-AB340E5039AC,com.zhiliaoapp.musically,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/BA6B007C-3E42-982B-8BA2-08E7D346CD63,com.king.candycrushsaga,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/DAD20B1F-9954-68E4-DA7A-39AB54FB4C72,com.pinterest,noise,"App-Sandbox (Skelett, spec-getrieben)"
-iPhone,CaseForge/cases/NoiseTest/01_ios_full_fs/private/var/mobile/Containers/Data/Application/DE06F4AD-E5C6-0775-1E68-0E26F8D32B43,net.whatsapp.WhatsApp,noise,"App-Sandbox (Skelett, spec-getrieben)"
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/ch.threema.app,ch.threema.app,context,Threema (verschluesselt)
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/com.discord,com.discord,noise,Discord
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/com.ebay.kleinanzeigen,com.ebay.kleinanzeigen,context,Kleinanzeigen – Suche 'Auto schnell verkaufen' (Geldnot)
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/com.google.android.gm,com.google.android.gm,noise,Gmail
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/com.microsoft.office.outlook,com.microsoft.office.outlook,noise,Outlook – Mail-Skelett
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/com.paypal.android.p2pmobile,com.paypal.android.p2pmobile,noise,PayPal
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/com.starfinanz.smob.android.sfinanzstatus,com.starfinanz.smob.android.sfinanzstatus,context,"Sparkasse-App – Konto im Minus, Teilzahlung an Klenk (Schuldenmotiv)"
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/de.foduufinanz.finanzguru,de.foduufinanz.finanzguru,context,Finanzguru – Budget 'Schulden/Kredite' (Geldnot)
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/de.komoot.android,de.komoot.android,noise,Komoot
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/org.telegram.messenger,org.telegram.messenger,noise,Telegram – cache4-Skelett
+Samsung,../../../../../tmp/cf_ref/02_android_full_fs/data/data/org.thoughtcrime.securesms,org.thoughtcrime.securesms,context,Signal (verschluesselt) – verdeckte Kommunikation Daniel
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/08B6841D-EE08-189D-80DB-2ABB9716E109,de.bahn.dbnavigator,context,DB Navigator – Reisesuche Stuttgart->Nachbarstadt 25.01 07:09 (passt zu Safari/BIOME)
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/1B10BB69-4518-05F6-218E-E17072034AAE,com.netflix.Netflix,noise,Netflix
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/22401080-6397-A452-E7BE-BEE985413123,de.is24.iphone,context,ImmobilienScout24 – gespeicherte 2-Zimmer-Suche (passt zu Trennungsabsicht)
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/4335B283-E3F4-C601-4E3D-2D9AA3D89232,com.google.Gmail,noise,Gmail
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/50A4796D-E7EB-2E4E-196D-F1C83E7C0C83,com.spotify.client,noise,Spotify
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/7DB56A15-DFB8-66B4-6B2E-CAC57E1EB6BF,com.apple.mobilenotes,context,Notizen – persoenliche Notiz (Belastungskontext)
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/85EDAA5F-F690-FC2B-ED9B-BAF7BAAC2C08,com.burbn.instagram,noise,Instagram – Direct-Skelett
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/86C9827A-BAD4-FCB2-2A9B-01845F4F44CB,org.whispersystems.signal,context,"Signal (verschluesselt) – verdeckte Kommunikation, Inhalt nicht im Klartext"
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/A64071B0-98D0-80DB-6637-1B4EA603A114,de.komoot.iphone,noise,Komoot
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/C06EA0EA-6094-E082-F0D9-11DDEAAFE83A,ch.threema.iapp.ThreemaApp,context,Threema (verschluesselt) – verdeckte Kommunikation
+iPhone,../../../../../tmp/cf_ref/01_ios_full_fs/private/var/mobile/Containers/Data/Application/E14986B0-51EC-4681-9ACF-19031A3B6F58,ph.telegra.Telegraph,noise,Telegram – Postbox-Skelett
