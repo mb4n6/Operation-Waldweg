@@ -86,9 +86,23 @@ FALLBACK_SAFARI_URLS = [
     ("2026-01-22T22:40:00+01:00", "https://www.immobilienscout24.de/wohnung-mieten", "wohnung mieten 2 zimmer - ImmoScout24"),
     ("2026-01-20T19:30:00+01:00", "https://www.chefkoch.de/", "Chefkoch - Rezepte"),
 ]
-# Master-getrieben (Safari = iOS-Browser), sonst Referenz-Fallback
-_mt_safari = cmio.browser_history("ios")
-SAFARI_URLS = _mt_safari if _mt_safari else FALLBACK_SAFARI_URLS
+# Master-getrieben (Safari = iOS-Browser), sonst Pool/seed (Nicht-Referenz) bzw. Fallback
+def _resolve_safari():
+    import noise_pools as _np
+    from datetime import datetime as _dt, timedelta as _td
+    mt = cmio.browser_history("ios")
+    if mt:
+        return mt
+    if cfr.is_reference():
+        return FALLBACK_SAFARI_URLS
+    lang = cmio.language_short()
+    n = cmio.noise_count(4, key="browser_noise")
+    picked = cfr.sample(_np.web(lang), n, salt="safari_noise")
+    base = _dt.fromisoformat("2026-01-20T19:00:00+01:00")
+    return [((base + _td(hours=i)).isoformat(), u, t) for i, (u, t) in enumerate(picked)]
+
+
+SAFARI_URLS = _resolve_safari()
 
 
 def build_safari():

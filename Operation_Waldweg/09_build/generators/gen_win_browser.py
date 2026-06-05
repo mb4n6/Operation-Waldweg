@@ -15,13 +15,15 @@ import sys
 import json
 import shutil
 import sqlite3
-from datetime import datetime
+from datetime import datetime, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BUILD = os.path.dirname(HERE)
 ROOT = os.path.dirname(BUILD)
 sys.path.insert(0, HERE)
 import case_master_io as cmio
+import caseforge_rng as cfr
+import noise_pools as npool
 WIN = os.environ.get("WALDWEG_WIN_FS", os.path.join(ROOT, "03_windows_triage"))
 WUSER = cmio.windows_username()   # Windows-Profilordner aus Fall-Besitzer
 EDGE = os.path.join(WIN, f"C/Users/{WUSER}/AppData/Local/Microsoft/Edge/User Data/Default")
@@ -50,8 +52,18 @@ DOWNLOADS = [
 
 def build_history():
     mt = cmio.browser_history("windows")
-    URLS = mt if mt else FALLBACK_URLS
-    print(f"  Edge-Inhaltsquelle: {'Master' if mt else 'Referenz-Fallback'} ({len(URLS)} URLs)")
+    if mt:
+        URLS = mt; src = "Master"
+    elif cfr.is_reference():
+        URLS = FALLBACK_URLS; src = "Referenz-Fallback"
+    else:
+        lang = cmio.language_short()
+        n = cmio.noise_count(4, key="browser_noise")
+        picked = cfr.sample(npool.web(lang), n, salt="edge_noise")
+        base = datetime.fromisoformat("2026-01-19T20:00:00+01:00")
+        URLS = [((base + timedelta(hours=i)).isoformat(), u, t) for i, (u, t) in enumerate(picked)]
+        src = f"Pool/seed (scope, {len(URLS)})"
+    print(f"  Edge-Inhaltsquelle: {src} ({len(URLS)} URLs)")
     p = os.path.join(TMP, "History")
     con = sqlite3.connect(p)
     con.executescript("""

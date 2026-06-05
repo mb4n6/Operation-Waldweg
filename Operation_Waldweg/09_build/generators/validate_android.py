@@ -34,7 +34,7 @@ def gate_sms():
     con = ro(P_MMSSMS)
     rows = con.execute("""SELECT date, address, type, body FROM sms
                           ORDER BY date""").fetchall()
-    ok("sms-Query laeuft", len(rows) == 2, f"{len(rows)} SMS")
+    ok("sms-Query laeuft", len(rows) >= 1, f"{len(rows)} SMS")
     dt = datetime.fromtimestamp(rows[0][0] / 1000, timezone.utc)
     ok("Unix-ms Timestamp plausibel", dt.year == 2026, f"{dt:%Y-%m-%d %H:%M}")
     con.close()

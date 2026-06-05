@@ -62,14 +62,32 @@ def reset(path):
 # ---------------------------------------------------------------------
 # mmssms.db  (SMS auf Daniels Geraet — wenig, da er WhatsApp nutzt)
 # ---------------------------------------------------------------------
-SMS_ROWS = [
+FALLBACK_SMS_ROWS = [
     # (iso, address, type, body)   type 1=inbox(empfangen) 2=sent(gesendet)
     ("2026-01-22T11:15:00+01:00", TOBIAS, 1, "Komm heute in die Werkstatt, wir reden ueber die Rechnung."),
     ("2026-01-22T11:40:00+01:00", TOBIAS, 2, "Schaffe ich erst Donnerstag."),
 ]
 
 
+def resolve_sms_rows():
+    """Referenz -> Fallback; sonst seed-gezogene, scope-skalierte Pool-SMS."""
+    if cfr.is_reference():
+        return FALLBACK_SMS_ROWS, "Referenz-Fallback"
+    lang = cmio.language_short()
+    n = cmio.noise_count(2, key="sms_noise")
+    texts = cfr.sample(npool.sms(lang), n, salt="sms_noise")
+    r = cfr.stream("sms_addr")
+    base = datetime.fromisoformat("2026-01-12T09:00:00+01:00")
+    rows = []
+    for i, t in enumerate(texts):
+        addr = "+49151" + "".join(str(r.randint(0, 9)) for _ in range(8))
+        rows.append(((base + timedelta(hours=i)).isoformat(), addr, 1 if i % 2 else 2, t))
+    return rows, f"Pool/seed (scope, {len(rows)})"
+
+
 def build_mmssms():
+    SMS_ROWS, src = resolve_sms_rows()
+    print(f"  SMS-Inhaltsquelle: {src} ({len(SMS_ROWS)})")
     reset(P_MMSSMS)
     con = sqlite3.connect(P_MMSSMS)
     con.executescript("""

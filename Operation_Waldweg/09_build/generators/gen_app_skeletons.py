@@ -316,10 +316,22 @@ def main():
             build_min_ios(b)
         for p in (and_pkgs or []):
             build_min_android(p)
-    else:
+    elif cfr.is_reference():
         print("App-Sandbox-Inhaltsquelle: Referenz-Fallback")
         build_ios_apps()
         build_android_apps()
+    else:
+        # seed-gezogene, scope-skalierte Noise-Apps aus dem Pool
+        import noise_pools as npool
+        ni = cmio.noise_count(10, key="ios_apps")
+        na = cmio.noise_count(10, key="android_apps")
+        ios_sel = cfr.sample(npool.apps("ios"), ni, salt="ios_apps")
+        and_sel = cfr.sample(npool.apps("android"), na, salt="android_apps")
+        print(f"App-Sandbox-Inhaltsquelle: Pool/seed (scope, iOS={len(ios_sel)}, Android={len(and_sel)})")
+        for b in ios_sel:
+            build_min_ios(b)
+        for p in and_sel:
+            build_min_android(p)
     out = write_manifest()
     ni = sum(1 for m in manifest if m[0] == "iPhone")
     na = sum(1 for m in manifest if m[0] == "Samsung")
