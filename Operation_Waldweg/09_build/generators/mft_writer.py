@@ -88,8 +88,63 @@ def _fn_content(parent_ref, name, times, real_size, namespace=1):
     return bytes(b) + name_u
 
 
+def _enc_int_le(value, signed=False):
+    """Kleinste LE-Bytefolge fuer einen (ggf. signed) Integer."""
+    if value == 0:
+        return b"\x00"
+    if signed:
+        length = 1
+        while not (-(1 << (8 * length - 1)) <= value < (1 << (8 * length - 1))):
+            length += 1
+        return value.to_bytes(length, "little", signed=True)
+    length = (value.bit_length() + 7) // 8
+    return value.to_bytes(length, "little", signed=False)
+
+
+def encode_runs(runs):
+    """runs = [(length_clusters, lcn_absolut), ...] -> NTFS-DataRun-Bytes."""
+    out = bytearray()
+    prev_lcn = 0
+    for length, lcn in runs:
+        len_b = _enc_int_le(length, signed=False)
+        delta = lcn - prev_lcn
+        off_b = _enc_int_le(delta, signed=True)
+        out.append((len(off_b) << 4) | len(len_b))
+        out += len_b + off_b
+        prev_lcn = lcn
+    out.append(0x00)   # Terminator
+    return bytes(out)
+
+
+def _attr_data_nonresident(real_size, runs, attr_id, cluster_size=4096):
+    """Non-Resident $DATA-Attribut (0x80) mit Data-Runs."""
+    run_bytes = encode_runs(runs)
+    total_clusters = sum(l for l, _ in runs)
+    alloc = total_clusters * cluster_size
+    runs_off = 0x40
+    head = bytearray(runs_off)
+    struct.pack_into("<I", head, 0x00, 0x80)
+    struct.pack_into("<B", head, 0x08, 1)               # non-resident
+    struct.pack_into("<H", head, 0x20, runs_off)        # data runs offset
+    struct.pack_into("<Q", head, 0x10, 0)               # start VCN
+    struct.pack_into("<Q", head, 0x18, total_clusters - 1)  # last VCN
+    struct.pack_into("<H", head, 0x0E, attr_id)
+    struct.pack_into("<Q", head, 0x28, alloc)           # allocated size
+    struct.pack_into("<Q", head, 0x30, real_size)       # real size
+    struct.pack_into("<Q", head, 0x38, real_size)       # initialized size
+    out = bytes(head) + run_bytes
+    total_len = len(out)
+    if total_len % 8:
+        total_len += 8 - total_len % 8
+        out += b"\x00" * (total_len - len(out))
+    struct.pack_into("<I", bytearray(out[:4]), 0, 0x80)  # noop, type already set
+    out = bytearray(out)
+    struct.pack_into("<I", out, 0x04, len(out))          # attribute length
+    return _pad8(bytes(out))
+
+
 def build_record(rec_no, seq, name, parent_ref, si_times, fn_times,
-                 data=b"", is_dir=False):
+                 data=b"", is_dir=False, nonresident=None):
     """Ein vollstaendiger 1024-Byte FILE-Record inkl. Fixups."""
     usa_off = 0x30
     usa_count = REC_SIZE // SECTOR + 1          # 3 fuer 1024
@@ -100,8 +155,12 @@ def build_record(rec_no, seq, name, parent_ref, si_times, fn_times,
     aid = 1
     attrs = bytearray()
     attrs += _attr_header(0x10, _si_content(si_times), aid); aid += 1
-    attrs += _attr_header(0x30, _fn_content(parent_ref, name, fn_times, len(data)), aid); aid += 1
-    attrs += _attr_header(0x80, data, aid, name=""); aid += 1
+    fn_size = nonresident[0] if nonresident else len(data)
+    attrs += _attr_header(0x30, _fn_content(parent_ref, name, fn_times, fn_size), aid); aid += 1
+    if nonresident:
+        attrs += _attr_data_nonresident(nonresident[0], nonresident[1], aid); aid += 1
+    else:
+        attrs += _attr_header(0x80, data, aid, name=""); aid += 1
     attrs += struct.pack("<I", 0xFFFFFFFF)      # End-Marker
 
     used = first_attr + len(attrs)

@@ -32,35 +32,50 @@ def ref(n):
     return mw.mft_ref(n, 1)
 
 
-# (rec_no, name, parent_rec, is_dir, data, deleted, times)
+# NTFS-Systemrecords 0-11 (Record 5 = Wurzelverzeichnis ".")
+SYSTEM = [
+    (0, "$MFT", 5, False), (1, "$MFTMirr", 5, False), (2, "$LogFile", 5, False),
+    (3, "$Volume", 5, False), (4, "$AttrDef", 5, False), (5, ".", 5, True),
+    (6, "$Bitmap", 5, False), (7, "$Boot", 5, False), (8, "$BadClus", 5, False),
+    (9, "$Secure", 5, False), (10, "$UpCase", 5, False), (11, "$Extend", 5, True),
+]
+
+# (rec_no, name, parent_rec, is_dir, data, deleted, times, nonresident)
+#   nonresident = (real_size, [(length_clusters, lcn_absolut), ...]) oder None
 PLAN = [
-    (30, "Users", 5, True, b"", False, T1),
-    (31, WUSER, 30, True, b"", False, T1),
-    (32, "Documents", 31, True, b"", False, T1),
-    (33, "Finanzen", 32, True, b"", False, T1),
-    (34, "Downloads", 31, True, b"", False, T1),
+    (30, "Users", 5, True, b"", False, T1, None),
+    (31, WUSER, 30, True, b"", False, T1, None),
+    (32, "Documents", 31, True, b"", False, T1, None),
+    (33, "Finanzen", 32, True, b"", False, T1, None),
+    (34, "Downloads", 31, True, b"", False, T1, None),
     (40, "Schuldenaufstellung_Jan.xlsx", 33, False,
-     b"PK\x03\x04 (geloeschter XLSX-Inhalt) Schuldenaufstellung", True, T3),
+     b"PK\x03\x04 (geloeschter XLSX-Inhalt) Schuldenaufstellung", True, T3, None),
     (41, "Kreditantrag_Sofort.pdf", 34, False,
-     b"%PDF-1.7 (synthetischer Kreditantrag)", False, T2),
-    (42, "rufus-4.4p.exe", 34, False, b"MZ (synthetische EXE)", False, T2),
+     b"%PDF-1.7 (synthetischer Kreditantrag)", False, T2, None),
+    # rufus-4.4p.exe: grosse Datei -> NON-RESIDENT $DATA mit fragmentierten Runs
+    (42, "rufus-4.4p.exe", 34, False, b"", False, T2,
+     (1_458_176, [(178, 1_000_000), (178, 1_500_500)])),
 ]
 
 
 def build():
     os.makedirs(os.path.dirname(MFT), exist_ok=True)
     out = bytearray()
-    for rec_no, name, parent, is_dir, data, deleted, times in PLAN:
+    # Systemrecords zuerst
+    for rec_no, name, parent, is_dir in SYSTEM:
+        out += mw.build_record(rec_no, 1, name, ref(parent), T1, T1, data=b"", is_dir=is_dir)
+    # Fallbezogene Records
+    for rec_no, name, parent, is_dir, data, deleted, times, nonres in PLAN:
         rec = bytearray(mw.build_record(rec_no, 1, name, ref(parent),
-                                        times, times, data=data, is_dir=is_dir))
+                                        times, times, data=data, is_dir=is_dir,
+                                        nonresident=nonres))
         if deleted:
-            # In-Use-Bit (0x01) im Flags-Feld (0x16) loeschen -> geloeschter Eintrag
             flags = struct.unpack_from("<H", rec, 0x16)[0] & ~0x01
             struct.pack_into("<H", rec, 0x16, flags)
         out += rec
     with open(MFT, "wb") as f:
         f.write(out)
-    return len(PLAN)
+    return len(SYSTEM) + len(PLAN)
 
 
 def verify():

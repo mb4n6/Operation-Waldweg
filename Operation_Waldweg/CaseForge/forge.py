@@ -163,8 +163,18 @@ def cmd_build(args):
     subprocess.run([sys.executable, os.path.join(HERE, "catalog.py"),
                     "--out", os.path.join(root, "06_master", "Artefakt_Katalog.md"),
                     "--csv", os.path.join(root, "06_master", "Artefakt_Katalog.csv")])
+    # Auto-Report je Fall
+    subprocess.run([sys.executable, os.path.join(GEN, "gen_report.py")], env=env)
     print("BUILD:", "OK" if ok else "FEHLER")
     sys.exit(0 if ok else 1)
+
+
+def cmd_report(args):
+    root = case_dir(args)
+    master = os.path.join(root, "case_master.yaml")
+    master = master if os.path.exists(master) else REF_MASTER
+    env = _env(root, master)
+    subprocess.run([sys.executable, os.path.join(GEN, "gen_report.py")], env=env)
 
 
 def _gate_mode(root, master, override=None):
@@ -238,7 +248,8 @@ def main():
     p.add_argument("--timeout", type=int, default=1800, help="ollama Read-Timeout pro Chunk (Sekunden)")
     i = sub.add_parser("init"); i.set_defaults(func=cmd_init)
     i.add_argument("--name", required=True); i.add_argument("--from", dest="frm")
-    for name, fn in (("build", cmd_build), ("validate", cmd_validate), ("run", cmd_run)):
+    for name, fn in (("build", cmd_build), ("validate", cmd_validate), ("run", cmd_run),
+                     ("report", cmd_report)):
         q = sub.add_parser(name); q.set_defaults(func=fn)
         q.add_argument("--case"); q.add_argument("--root", default=ROOT)
         if name == "build":

@@ -184,7 +184,7 @@ def gate_extended():
         print("$MFT (NTFS):")
         raw = open(mft, "rb").read()
         recs = len(raw) // 1024
-        names, fixok = [], True
+        names, fixok, nonres_runs = [], True, []
         for i in range(recs):
             r = bytearray(raw[i * 1024:(i + 1) * 1024])
             if r[0:4] != b"FILE":
@@ -206,9 +206,24 @@ def gate_extended():
                     co = _st.unpack_from("<H", r, off + 0x14)[0]
                     nl = r[off + co + 0x40]
                     names.append(r[off + co + 0x42:off + co + 0x42 + nl * 2].decode("utf-16-le"))
+                if at == 0x80 and r[off + 8] == 1:           # non-resident $DATA
+                    ro = _st.unpack_from("<H", r, off + 0x20)[0]
+                    runb = r[off + ro:off + al]
+                    rr, pos, prev = [], 0, 0
+                    while pos < len(runb) and runb[pos] != 0:
+                        h = runb[pos]; pos += 1; lnf = h & 0xF; off_f = h >> 4
+                        length = int.from_bytes(runb[pos:pos + lnf], "little"); pos += lnf
+                        prev += int.from_bytes(runb[pos:pos + off_f], "little", signed=True); pos += off_f
+                        rr.append((length, prev))
+                    nonres_runs.extend(rr)
                 off += al if al else 8
         ok("$MFT FILE-Records + Fixups valide", recs >= 1 and fixok, f"{recs} Records")
         ok("$MFT $FILE_NAME lesbar", len(names) >= 1, f"{len(names)} Namen")
+        sysnames = {"$MFT", "$MFTMirr", "$LogFile", "$Volume", "$Boot", "$UpCase"}
+        ok("$MFT NTFS-Systemrecords vorhanden", len(sysnames & set(names)) >= 4,
+           f"{sorted(sysnames & set(names))}")
+        ok("$MFT Non-Resident $DATA Data-Runs dekodierbar", len(nonres_runs) >= 1,
+           f"{len(nonres_runs)} Runs")
     # SRUM SRUDB.dat (ESE-Header-Stub) — existenz-gesteuert
     sru = os.path.join(WFS, "C/Windows/System32/sru/SRUDB.dat")
     if os.path.exists(sru):
