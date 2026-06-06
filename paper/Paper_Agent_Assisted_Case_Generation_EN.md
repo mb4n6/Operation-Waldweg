@@ -191,6 +191,10 @@ generation is deterministic.
 
 ### 5.2 The pipeline: PROPOSE → REVIEW → BUILD → VALIDATE
 
+![Agentic division of labour in CaseForge: the LLM agent designs the case as a schema-conformant specification (PROPOSE), a mandatory human REVIEW verifies and approves it, deterministic generators project the single source of truth into native-format artifacts (BUILD), and real forensic tools evidence schema fidelity (VALIDATE) — enclosed by hard-wired ethics guardrails.](figures/agentic_approach_en.svg)
+
+*Figure 1: Agentic division of labour — the agent designs the case, audited deterministic code builds and validates the data, the human decides.*
+
 1. **PROPOSE.** From the user brief the framework builds a prompt bundling the "case designer"
    system prompt, the available OS profiles, the generator catalogue (registry), the list of
    forensic tools and the case-spec JSON schema. The agent answers with a spec proposal plus an

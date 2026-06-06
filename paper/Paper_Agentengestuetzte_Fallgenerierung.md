@@ -196,6 +196,10 @@ Modell liefert verwertbare Spezifikate, weil die nachgelagerte Erzeugung determi
 
 ### 5.2 Die Pipeline: PROPOSE → REVIEW → BUILD → VALIDATE
 
+![Agentische Arbeitsteilung in CaseForge: Der LLM-Agent entwirft den Fall als schema-konformes Spezifikat (PROPOSE), ein verpflichtender menschlicher REVIEW verifiziert und gibt frei, deterministische Generatoren projizieren die zentrale Wahrheit in Originalformat-Artefakte (BUILD), und reale Forensiktools belegen die Schematreue (VALIDATE) — eingerahmt von fest verankerten Ethik-Leitplanken.](figures/agentischer_ansatz_de.svg)
+
+*Abbildung 1: Agentische Arbeitsteilung — der Agent entwirft den Fall, geprüfter deterministischer Code erzeugt und validiert die Daten, der Mensch entscheidet.*
+
 1. **PROPOSE.** Aus der Nutzereingabe baut das Framework einen Prompt, der den
    System-Prompt des „Fall-Designers", die verfügbaren OS-Profile, den Generator-Katalog
    (Registry), die Liste der Forensiktools und das JSON-Schema des Case-Spec bündelt. Der Agent

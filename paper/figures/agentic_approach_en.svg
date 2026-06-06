@@ -1,0 +1,84 @@
+<svg viewBox="0 0 920 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">CaseForge — agentic division of labour</title>
+  <desc id="d">The LLM agent designs the case as a schema-conformant specification, a human mandatorily verifies it, deterministic generators project the single source of truth into native-format artifacts, and real forensic tools validate them as the acceptance gate. The whole pipeline is enclosed by ethics guardrails.</desc>
+
+  <rect x="0" y="0" width="920" height="430" fill="#ffffff"/>
+
+  <!-- Ethics guardrail frame -->
+  <rect x="20" y="58" width="880" height="252" rx="16" fill="none" stroke="#b5482f" stroke-width="1.2" stroke-dasharray="2 5" opacity="0.85"/>
+  <text x="36" y="80" font-size="11" font-weight="700" letter-spacing="0.4" fill="#b5482f">ETHICS GUARDRAILS · synthetic_training_data_only</text>
+
+  <!-- role band labels -->
+  <text x="110" y="106" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="0.5" fill="#b5482f">AGENT (LLM)</text>
+  <text x="330" y="106" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="0.5" fill="#b5482f">HUMAN</text>
+  <text x="660" y="106" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="0.5" fill="#6b7280">AUDITED, DETERMINISTIC CODE</text>
+
+  <!-- arrows -->
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+  <line x1="192" y1="186" x2="248" y2="186" stroke="#6b7280" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="412" y1="186" x2="468" y2="186" stroke="#6b7280" stroke-width="2" marker-end="url(#ah)"/>
+  <line x1="632" y1="186" x2="688" y2="186" stroke="#6b7280" stroke-width="2" marker-end="url(#ah)"/>
+
+  <!-- Stage 1 PROPOSE (agent) -->
+  <rect x="32" y="120" width="160" height="128" rx="12" fill="#fdf6f4" stroke="#b5482f" stroke-width="2"/>
+  <text x="112" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2328">1 · PROPOSE</text>
+  <text x="112" y="174" text-anchor="middle" font-size="11.5" fill="#5b6068">case spec (JSON)</text>
+  <text x="112" y="194" text-anchor="middle" font-size="11.5" fill="#5b6068">plot · persons · timeline</text>
+  <text x="112" y="214" text-anchor="middle" font-size="11.5" fill="#5b6068">planted contradictions</text>
+  <text x="112" y="234" text-anchor="middle" font-size="10.5" font-style="italic" fill="#8a8f97">model proposes</text>
+
+  <!-- Stage 2 REVIEW (human) -->
+  <rect x="252" y="120" width="160" height="128" rx="12" fill="#ffffff" stroke="#b5482f" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="332" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2328">2 · REVIEW</text>
+  <text x="332" y="176" text-anchor="middle" font-size="11.5" fill="#5b6068">verify /</text>
+  <text x="332" y="196" text-anchor="middle" font-size="11.5" fill="#5b6068">adjust / approve</text>
+  <text x="332" y="224" text-anchor="middle" font-size="11" font-weight="700" fill="#b5482f">MANDATORY STEP</text>
+
+  <!-- Stage 3 BUILD -->
+  <rect x="472" y="120" width="160" height="128" rx="12" fill="#ffffff" stroke="#c9ccd1" stroke-width="1.5"/>
+  <text x="552" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2328">3 · BUILD</text>
+  <text x="552" y="176" text-anchor="middle" font-size="11.5" fill="#5b6068">deterministic</text>
+  <text x="552" y="196" text-anchor="middle" font-size="11.5" fill="#5b6068">generators</text>
+  <text x="552" y="216" text-anchor="middle" font-size="11" fill="#5b6068">SQLite · plist · regf</text>
+  <text x="552" y="234" text-anchor="middle" font-size="11" fill="#5b6068">EVTX · $MFT · ABX</text>
+
+  <!-- Stage 4 VALIDATE -->
+  <rect x="692" y="120" width="160" height="128" rx="12" fill="#ffffff" stroke="#c9ccd1" stroke-width="1.5"/>
+  <text x="772" y="150" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2328">4 · VALIDATE</text>
+  <text x="772" y="176" text-anchor="middle" font-size="11.5" fill="#5b6068">real forensic tools</text>
+  <text x="772" y="196" text-anchor="middle" font-size="11" fill="#5b6068">iLEAPP · ALEAPP</text>
+  <text x="772" y="216" text-anchor="middle" font-size="11" fill="#5b6068">regipy · python-evtx</text>
+  <text x="772" y="234" text-anchor="middle" font-size="10.5" font-style="italic" fill="#8a8f97">acceptance gate</text>
+
+  <!-- single source of truth note -->
+  <text x="460" y="292" text-anchor="middle" font-size="11.5" fill="#5b6068">case_master.yaml — <tspan font-style="italic">one truth, many projections</tspan></text>
+
+  <!-- property chips -->
+  <g font-size="11" font-weight="600" fill="#1f2328">
+    <rect x="32" y="338" width="232" height="32" rx="16" fill="#f5f6f8" stroke="#e1e3e7"/>
+    <circle cx="52" cy="354" r="4.5" fill="#1f2328"/>
+    <text x="64" y="358">model-independent data quality</text>
+
+    <rect x="278" y="338" width="228" height="32" rx="16" fill="#f5f6f8" stroke="#e1e3e7"/>
+    <circle cx="298" cy="354" r="4.5" fill="#1f2328"/>
+    <text x="310" y="358">seed = bit-stable reproducible</text>
+
+    <rect x="520" y="338" width="332" height="32" rx="16" fill="#f5f6f8" stroke="#e1e3e7"/>
+    <circle cx="540" cy="354" r="4.5" fill="#b5482f"/>
+    <text x="552" y="358">realism tool-evidenced, not asserted</text>
+  </g>
+
+  <!-- legend -->
+  <g font-size="10.5" fill="#6b7280">
+    <rect x="32" y="396" width="13" height="13" rx="3" fill="#fdf6f4" stroke="#b5482f" stroke-width="2"/>
+    <text x="51" y="406">agent designs</text>
+    <rect x="156" y="396" width="13" height="13" rx="3" fill="#ffffff" stroke="#b5482f" stroke-width="2" stroke-dasharray="4 3"/>
+    <text x="175" y="406">human verifies (mandatory)</text>
+    <rect x="356" y="396" width="13" height="13" rx="3" fill="#ffffff" stroke="#c9ccd1" stroke-width="1.5"/>
+    <text x="375" y="406">audited code builds &amp; validates</text>
+  </g>
+</svg>
